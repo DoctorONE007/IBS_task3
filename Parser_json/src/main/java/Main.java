@@ -14,7 +14,6 @@ public class Main {
         Gson gson = new Gson();
         Companies companies = null;
         try (FileReader reader = new FileReader("task.json")) {
-
             companies = gson.fromJson(reader, Companies.class);
 
         } catch (Exception e) {
@@ -88,6 +87,9 @@ public class Main {
             System.out.println("Неверный формат даты");
             System.out.println("Попробуйте еще раз");
             return false;
+        }
+        if(date.split("")[date.length() - 3].equals(".") ||date.split("")[date.length() - 3].equals("/") ){
+            date = date.substring(0,date.length()-2) + "19" + date.substring(date.length()-2,date.length());
         }
         userdate = LocalDate.parse(date, parser);
         return true;
